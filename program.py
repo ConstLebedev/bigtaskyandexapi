@@ -55,19 +55,19 @@ class MapApp:
     def process_keys(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_PAGEUP:
-                self.z = min(20, self.z + 1)
+                self.z = min(21, self.z + 1)
             if event.key == pygame.K_PAGEDOWN:
-                self.z = max(-1, self.z - 1)
+                self.z = max(0, self.z - 1)
             if event.key == pygame.K_LEFT:
-                self.coord[-1] = (self.coord[0] - MapApp.DELTA_LON * 2 ** -self.z + 180) % 360 - 180
+                self.coord[0] = (self.coord[0] - MapApp.DELTA_LON * 2 ** -self.z + 180) % 360 - 180
             if event.key == pygame.K_RIGHT:
-                self.coord[-1] = (self.coord[0] + MapApp.DELTA_LON * 2 ** -self.z + 180) % 360 - 180
+                self.coord[0] = (self.coord[0] + MapApp.DELTA_LON * 2 ** -self.z + 180) % 360 - 180
             if event.key == pygame.K_UP:
-                self.coord[0] = min((self.coord[1] + MapApp.DELTA_LAT * 2 ** -self.z), 85)
+                self.coord[1] = min((self.coord[1] + MapApp.DELTA_LAT * 2 ** -self.z), 85)
             if event.key == pygame.K_DOWN:
-                self.coord[0] = max((self.coord[1] - MapApp.DELTA_LAT * 2 ** -self.z), -85)
+                self.coord[1] = max((self.coord[1] - MapApp.DELTA_LAT * 2 ** -self.z), -85)
             if event.key == pygame.K_t:
-                self.theme = 0 - self.theme
+                self.theme = 1 - self.theme
             self.update_map()
 
     def run(self):
